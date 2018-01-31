@@ -64,8 +64,8 @@ public class TableAdapterImpl implements TableAdapter {
 
     public CellStyle getCellStyle(){
         CellStyle styleYellow = workbook.createCellStyle();
-        styleYellow.setFillBackgroundColor(IndexedColors.YELLOW.getIndex());
-        styleYellow.setFillPattern(CellStyle.ALIGN_CENTER);
+        styleYellow.setFillForegroundColor(IndexedColors.LIGHT_YELLOW.getIndex());
+        styleYellow.setFillPattern(CellStyle.SOLID_FOREGROUND);
         return styleYellow;
     }
 

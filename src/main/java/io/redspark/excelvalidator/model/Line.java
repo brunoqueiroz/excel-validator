@@ -39,7 +39,7 @@ public class Line {
     }
 
     public  Line onlyDigits(int index){
-        ValidationUtils.removeSpecialCharacters(this.getCells().get(index).getValue());
+        this.getCells().get(index).setValue(ValidationUtils.removeSpecialCharacters(this.getCells().get(index).getValue()));
         return this;
     }
 

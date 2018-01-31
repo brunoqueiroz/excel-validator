@@ -10,6 +10,10 @@ import java.util.Optional;
 @Getter
 public class GenreValidator implements Validator{
 
+    public static final String MALE = "M";
+    public static final String FEMALE = "F";
+    public static final String INDIFFERENT = "I";
+
     private Boolean error;
     private String message;
 
@@ -18,7 +22,7 @@ public class GenreValidator implements Validator{
         this.error = false;
         if(StringUtils.isEmpty(value) ||
                 value.length() > 1  ||
-                !StringUtils.containsAny(value, "M", "F", "I")){
+                !StringUtils.containsAny(value, MALE, FEMALE, INDIFFERENT)){
             this.error = true;
             this.message = EnumValidations.MESSAGE_GENERO_INVALID.getText();
         }

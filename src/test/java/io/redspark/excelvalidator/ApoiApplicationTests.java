@@ -1,4 +1,4 @@
-package io.redspark.excelvalidator;
+ package io.redspark.excelvalidator;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -44,15 +44,6 @@ public class ApoiApplicationTests {
         this.path = "/Users/brunoqueiroz/Documents/upload/";
     }
 
-
-    @Test
-    public void testCreate() throws IOException {
-
-        FileInputStream spreadsheet = new FileInputStream("src/test/resources/sheet_company.xlsx");
-        new SheetValidatorService().execute(spreadsheet);
-
-
-    }
 
     @Test
     public void testNameColumnRequiredField() throws IOException {
@@ -136,6 +127,7 @@ public class ApoiApplicationTests {
         assertEquals(false, moneyValidator.execute("0").getError());
         assertEquals(true, moneyValidator.execute("1,2,4,24.24").getError());
         assertEquals(false, moneyValidator.execute("AFFS213,00").getError());
+        assertEquals(false, moneyValidator.execute("1").getError());
 
     }
 

@@ -51,7 +51,6 @@ public class ValidationUtils {
         try {
             //if not valid, it will throw ParseException
             Date date = sdf.parse(onlyDigitsDate);
-            System.out.println(onlyDigitsDate);
         } catch (ParseException e) {
             return false;
         }
