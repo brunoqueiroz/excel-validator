@@ -8,10 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
-import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.DataFormatter;
-import org.apache.poi.ss.usermodel.IndexedColors;
-import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -117,14 +114,29 @@ public class TableAdapterImpl implements TableAdapter {
     @Override
     public String getCellValue(Row currentRow, int index) {
         DataFormatter formatter = new DataFormatter();
+        Cell cell = currentRow.getCell(index);
         return formatter.formatCellValue(currentRow.getCell(index));
     }
 
     @Override
     public void cellTint(Line line, CellStyle styleYellow, int index) {
         org.apache.poi.ss.usermodel.Cell cell = line.getRow().getCell(index);
+        changeCelllToStringFormat(line, index, cell);
         cell = cell == null ? line.getRow().createCell(index) : cell;
         cell.setCellStyle(styleYellow);
+
+    }
+
+    /**
+     * Método que evita problemas quando a planilha está com formatação numérica.
+     *
+     * @param line
+     * @param index
+     * @param cell
+     */
+    private void changeCelllToStringFormat(Line line, int index, Cell cell) {
+        cell.setCellType(Cell.CELL_TYPE_STRING);
+        cell.setCellValue(line.getCells().get(index).getValue());
     }
 
 }

@@ -42,7 +42,7 @@ public class ValidationUtils {
         }
         String onlyDigitsDate = removeSpecialCharacters(dateToValidate);
 
-        if(onlyDigitsDate.length() > 8){
+        if(onlyDigitsDate.length() != 8){
             return false;
         }
         SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy");
