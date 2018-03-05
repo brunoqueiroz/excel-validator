@@ -17,6 +17,9 @@ public interface TableAdapter {
     CellStyle getCellStyle();
     String createSheet(String path) throws IOException;
     Line getHeader();
+
+    String createSheet(String path, String name) throws IOException;
+
     Boolean hasHeader();
     String getHeaderNameOf(int index);
     String getCellValue(Row currentRow, int index);

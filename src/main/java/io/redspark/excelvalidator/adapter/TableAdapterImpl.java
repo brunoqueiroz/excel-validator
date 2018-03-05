@@ -51,10 +51,12 @@ public class TableAdapterImpl implements TableAdapter {
     }
 
     private boolean isEmpty(Row row) {
-        for (int c = row.getFirstCellNum(); c < row.getLastCellNum(); c++) {
-            org.apache.poi.ss.usermodel.Cell cell = row.getCell(c);
-            if (cell != null && cell.getCellType() != org.apache.poi.ss.usermodel.Cell.CELL_TYPE_BLANK)
-                return false;
+        if(row != null) {
+            for (int c = row.getFirstCellNum(); c < row.getLastCellNum(); c++) {
+                org.apache.poi.ss.usermodel.Cell cell = row.getCell(c);
+                if (cell != null && cell.getCellType() != org.apache.poi.ss.usermodel.Cell.CELL_TYPE_BLANK)
+                    return false;
+            }
         }
         return true;
     }
@@ -68,12 +70,23 @@ public class TableAdapterImpl implements TableAdapter {
 
     @Override
     public String createSheet(String path) throws IOException {
+        return createSheet(path, null);
+    }
+
+    @Override
+    public String createSheet(String path, String name) throws IOException {
+
         UUID uuid = UUID.randomUUID();
         String myRandom = uuid.toString().substring(0, 30);
-        FileOutputStream fileOut = new FileOutputStream(path + myRandom + ".xlsx");
+        String fullname = myRandom + ".xlsx";
+
+        if(name != null){
+            fullname = name + ".xlsx" ;
+        }
+        FileOutputStream fileOut = new FileOutputStream(path + fullname);
         workbook.write(fileOut);
         fileOut.close();
-        return myRandom + ".xlsx";
+        return fullname;
     }
 
     private void createHeaderCells(List<CellBuilder> cells, Table table, Row headerRow){
@@ -115,7 +128,7 @@ public class TableAdapterImpl implements TableAdapter {
     public String getCellValue(Row currentRow, int index) {
         DataFormatter formatter = new DataFormatter();
         Cell cell = currentRow.getCell(index);
-        return formatter.formatCellValue(currentRow.getCell(index));
+        return formatter.formatCellValue(cell);
     }
 
     @Override
