@@ -19,10 +19,13 @@ public class GenreValidator implements Validator{
 
     @Override
     public Validator execute(String value) {
+
+        String genre = value.trim();
+
         this.error = false;
-        if(StringUtils.isEmpty(value) ||
-                value.length() > 1  ||
-                !StringUtils.containsAny(value, MALE, FEMALE, INDIFFERENT)){
+        if(StringUtils.isEmpty(genre) ||
+                genre.length() > 1  ||
+                !StringUtils.containsAny(genre, MALE, FEMALE, INDIFFERENT)){
             this.error = true;
             this.message = EnumValidations.MESSAGE_GENERO_INVALID.getText();
         }

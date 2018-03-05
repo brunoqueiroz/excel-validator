@@ -23,7 +23,7 @@ public class ValidationUtils {
     public static boolean validCPF(String cpfString) {
         if(cpfString != null && !cpfString.isEmpty()) {
             CPFValidator cpfValidator = new CPFValidator();
-            return cpfValidator.isEligible(cpfString);
+            return cpfValidator.isEligible(removeSpecialCharacters(cpfString));
         }
         return false;
     }
@@ -77,11 +77,11 @@ public class ValidationUtils {
 
     public static boolean isValidCellNumber(String cellNumber){
 
-        if(StringUtils.isEmpty(cellNumber)){
+        if(cellNumber == null && StringUtils.isEmpty(cellNumber)){
             return false;
         }
 
-        return cellNumber.matches("^9[1-9][0-9]{7}$");
+        return removeSpecialCharacters(cellNumber).trim().matches("^9[1-9][0-9]{7}$");
 
     }
 
@@ -91,7 +91,7 @@ public class ValidationUtils {
             return false;
         }
 
-        return status.matches("^[0-1]$");
+        return status.trim().matches("^[0-1]$");
 
     }
 

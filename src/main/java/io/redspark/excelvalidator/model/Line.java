@@ -3,6 +3,7 @@ package io.redspark.excelvalidator.model;
 import io.redspark.excelvalidator.enums.EnumValidations;
 import io.redspark.excelvalidator.utils.ValidationUtils;
 import lombok.Getter;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
 
@@ -35,10 +36,10 @@ public class Line {
     }
 
     public String getCellValueOf(int index){
-        return this.getCells().get(index).getValue();
+        return StringUtils.trim(this.getCells().get(index).getValue());
     }
 
-    public  Line onlyDigits(int index){
+    public Line onlyDigits(int index){
         this.getCells().get(index).setValue(ValidationUtils.removeSpecialCharacters(this.getCells().get(index).getValue()));
         return this;
     }
