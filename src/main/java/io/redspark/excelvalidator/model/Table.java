@@ -13,6 +13,7 @@ public class Table {
 
     @Getter
     private final TableAdapter adapter;
+    private final short indexDetail;
     @Getter
     private List<Line> lines = new ArrayList<Line>();
 
@@ -20,8 +21,13 @@ public class Table {
     private Boolean getHasErro;
 
     public Table(TableAdapter tableAdapter, List<CellBuilder> cells) {
+        this(tableAdapter, cells, Short.valueOf("-1").shortValue());
+    }
+
+    public Table(TableAdapter tableAdapter, List<CellBuilder> cells, short indexDetail) {
        this.adapter = tableAdapter;
        this.lines = tableAdapter.getLines(this, cells);
+       this.indexDetail = indexDetail;
     }
 
     public String getErrorString(){
@@ -35,7 +41,7 @@ public class Table {
     public void validateFields() {
         lines.forEach(line -> {
             line.validateAndMarkError();
-            line.createNewColumnWithErrorMessages();
+            line.createNewColumnWithErrorMessages(indexDetail);
             line.tintAllCellsWithError();
         });
     }

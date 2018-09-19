@@ -88,8 +88,8 @@ public class Line {
         return valid;
     }
 
-    public void createNewColumnWithErrorMessages() {
-        short lastCell = row.getLastCellNum();
+    public void createNewColumnWithErrorMessages(short index) {
+        short lastCell = index == -1 ? row.getLastCellNum() : index;
         org.apache.poi.ss.usermodel.Cell cell = row.createCell(lastCell);
         String message = EnumValidations.DETAIL.getText() + getErrorString();
         if (this.errors != null && !this.errors.isEmpty()) {

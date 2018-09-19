@@ -49,7 +49,7 @@ public class SheetValidatorService {
         cells.add(CellBuilder.builder(StatusColumn.class, 14).required(true));
 
         TableAdapterImpl tableAdapterImpl = new TableAdapterImpl(file, true);
-        Table table = new Table(tableAdapterImpl, cells);
+        Table table = new Table(tableAdapterImpl, cells, Short.valueOf("15").shortValue());
 
         table.validateFields();
         table.getAdapter().createSheet(NEW_FILE_NAME);

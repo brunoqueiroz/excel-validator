@@ -28,12 +28,20 @@ public class TableAdapterImpl implements TableAdapter {
     private final boolean hasHeader;
     @Getter
     private Line header;
+    private int headerLine;
+    private int firstLine;
 
     public TableAdapterImpl(InputStream inputStream, boolean hasHeader) {
+        this(inputStream, hasHeader, 0, 1);
+    }
+
+    public TableAdapterImpl(InputStream inputStream, boolean hasHeader, int headerLine, int firstLine) {
         this.hasHeader = hasHeader;
         try {
             workbook = new XSSFWorkbook(inputStream);
             content = workbook.getSheetAt(0);
+            this.headerLine = headerLine;
+            this.firstLine = firstLine;
             limparLinhasEmbranco(content);
 
         } catch (IOException e) {
@@ -111,8 +119,15 @@ public class TableAdapterImpl implements TableAdapter {
     public List<Line> getLines(Table table, List<CellBuilder> cells){
         Iterator<Row> iterator = content.iterator();
 
-        if(this.hasHeader) {
-            createHeaderCells(cells, table, iterator.next());
+        int i = 0;
+        for (Iterator<Row> it = iterator; it.hasNext(); i++) {
+            Row row = iterator.next();
+            if(hasHeader && i == this.headerLine){
+                createHeaderCells(cells, table, row);
+            }
+            if(i == this.firstLine-1){
+                break;
+            }
         }
 
         while (iterator.hasNext()) {
@@ -134,8 +149,8 @@ public class TableAdapterImpl implements TableAdapter {
     @Override
     public void cellTint(Line line, CellStyle styleYellow, int index) {
         org.apache.poi.ss.usermodel.Cell cell = line.getRow().getCell(index);
-        changeCelllToStringFormat(line, index, cell);
         cell = cell == null ? line.getRow().createCell(index) : cell;
+        changeCelllToStringFormat(line, index, cell);
         cell.setCellStyle(styleYellow);
 
     }
