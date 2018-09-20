@@ -21,7 +21,7 @@ public class Table {
     private Boolean getHasErro;
 
     public Table(TableAdapter tableAdapter, List<CellBuilder> cells) {
-        this(tableAdapter, cells, Short.valueOf("-1").shortValue());
+        this(tableAdapter, cells, Short.valueOf("-2").shortValue());
     }
 
     public Table(TableAdapter tableAdapter, List<CellBuilder> cells, short indexDetail) {

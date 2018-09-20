@@ -32,7 +32,7 @@ public class TableAdapterImpl implements TableAdapter {
     private int firstLine;
 
     public TableAdapterImpl(InputStream inputStream, boolean hasHeader) {
-        this(inputStream, hasHeader, 0, 1);
+        this(inputStream, hasHeader, 0, 2);
     }
 
     public TableAdapterImpl(InputStream inputStream, boolean hasHeader, int headerLine, int firstLine) {
@@ -125,7 +125,7 @@ public class TableAdapterImpl implements TableAdapter {
             if(hasHeader && i == this.headerLine){
                 createHeaderCells(cells, table, row);
             }
-            if(i == this.firstLine-1){
+            if(i == this.firstLine-2){
                 break;
             }
         }

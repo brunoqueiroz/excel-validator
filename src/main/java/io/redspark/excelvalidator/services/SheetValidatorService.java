@@ -26,7 +26,7 @@ import io.redspark.excelvalidator.model.fields.status.StatusColumn;
 
 public class SheetValidatorService {
 
-    private static final String NEW_FILE_NAME = "/Users/brunoqueiroz/Documents/upload/";
+    private static final String NEW_FILE_NAME = "/home/douglas/Desenvolvimento/files/";
 
     public void execute(InputStream file) throws IOException {
 
@@ -49,7 +49,7 @@ public class SheetValidatorService {
         cells.add(CellBuilder.builder(StatusColumn.class, 14).required(true));
 
         TableAdapterImpl tableAdapterImpl = new TableAdapterImpl(file, true);
-        Table table = new Table(tableAdapterImpl, cells, Short.valueOf("15").shortValue());
+        Table table = new Table(tableAdapterImpl, cells, Short.valueOf("16").shortValue());
 
         table.validateFields();
         table.getAdapter().createSheet(NEW_FILE_NAME);
