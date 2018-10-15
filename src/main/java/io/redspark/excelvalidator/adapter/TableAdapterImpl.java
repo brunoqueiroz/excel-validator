@@ -50,7 +50,7 @@ public class TableAdapterImpl implements TableAdapter {
     }
 
     private void limparLinhasEmbranco(XSSFSheet content2) {
-        for (int i = 1; i < content.getLastRowNum(); i++) {
+        for (int i = this.firstLine; i < content.getLastRowNum(); i++) {
             if (isEmpty(content.getRow(i))) {
                 content.shiftRows(i+1, content.getLastRowNum(), -1);
                 break;
@@ -125,7 +125,7 @@ public class TableAdapterImpl implements TableAdapter {
             if(hasHeader && i == this.headerLine){
                 createHeaderCells(cells, table, row);
             }
-            if(i == this.firstLine-2){
+            if(i == this.firstLine - 1){
                 break;
             }
         }
