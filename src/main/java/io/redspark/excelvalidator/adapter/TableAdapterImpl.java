@@ -143,6 +143,9 @@ public class TableAdapterImpl implements TableAdapter {
     public String getCellValue(Row currentRow, int index) {
         DataFormatter formatter = new DataFormatter();
         Cell cell = currentRow.getCell(index);
+        if(cell != null) {
+            cell.setCellStyle(null);
+        }
         return formatter.formatCellValue(cell);
     }
 
