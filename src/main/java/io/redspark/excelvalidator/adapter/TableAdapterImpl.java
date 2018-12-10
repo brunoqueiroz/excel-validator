@@ -1,9 +1,13 @@
 package io.redspark.excelvalidator.adapter;
 
+import io.redspark.excelvalidator.model.fields.birthday.BirthdayColumn;
+import io.redspark.excelvalidator.model.fields.common.BaseCell;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
@@ -140,9 +144,20 @@ public class TableAdapterImpl implements TableAdapter {
     }
 
     @Override
-    public String getCellValue(Row currentRow, int index) {
+    public String getCellValue(Row currentRow, int index,Class<? extends BaseCell> classType) {
+
         DataFormatter formatter = new DataFormatter();
         Cell cell = currentRow.getCell(index);
+
+        if(classType.equals(BirthdayColumn.class)){
+            try {
+                Date dateCellValue = cell.getDateCellValue();
+                return new SimpleDateFormat("dd/MM/yyyy").format(dateCellValue);
+            }catch(IllegalStateException e) {
+                System.out.println("Não conseguiu converter a data");
+            }
+        }
+
         if(cell != null) {
             cell.setCellStyle(null);
         }

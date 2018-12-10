@@ -25,6 +25,10 @@ public class CellBuilder {
         this.index = index;
     }
 
+    public Class<? extends BaseCell> getClassType() {
+        return classType;
+    }
+
     public static CellBuilder builder(Class classType, int index) {
         return new CellBuilder(classType, index);
     }

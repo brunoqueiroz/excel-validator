@@ -36,7 +36,7 @@ public class LineBuilder {
     public Line build() {
         Line line = new Line(this.table, this.row);
         this.cells.forEach(cellBuilder -> {
-            String valor = this.table.getAdapter().getCellValue(row, cellBuilder.getIndex());
+            String valor = this.table.getAdapter().getCellValue(row, cellBuilder.getIndex(), cellBuilder.getClassType());
             Cell cell = null;
             cell = cellBuilder.value(valor).line(line).build();
             line.addCell(cell);

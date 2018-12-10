@@ -3,6 +3,7 @@ package io.redspark.excelvalidator.adapter;
 import io.redspark.excelvalidator.builders.CellBuilder;
 import io.redspark.excelvalidator.model.Line;
 import io.redspark.excelvalidator.model.Table;
+import io.redspark.excelvalidator.model.fields.common.BaseCell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
 
@@ -25,7 +26,8 @@ public interface TableAdapter {
 
     String getHeaderNameOf(int index);
 
-    String getCellValue(Row currentRow, int index);
+    String getCellValue(Row currentRow, int index,
+        Class<? extends BaseCell> classType);
 
     void cellTint(Line line, CellStyle styleYellow, int index);
 
